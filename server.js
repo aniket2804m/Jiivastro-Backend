@@ -28,25 +28,43 @@ const app = express();
 // ==========================================
 // ✅ Development aur Production dono ke liye
 
+// const allowedOrigins = [
+//   "http://localhost:5173",        // Local development
+//   "http://localhost:3000",        // Backup local     
+//   process.env.FRONTEND_URL,  // Production frontend URL
+//   // Render par ye environment variable set karenge
+// ];
+
+// app.use(cors({ 
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       console.warn(`⚠️  CORS blocked: ${origin}`);
+//       callback(new Error("CORS not allowed"));
+//     }
+//   },
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+
 const allowedOrigins = [
-  "http://localhost:5173",        // Local development
-  "http://localhost:3000",        // Backup local     
-  process.env.FRONTEND_URL,  // Production frontend URL
-  // Render par ye environment variable set karenge
+  "http://localhost:5173",
+  "https://vedic-murex.vercel.app"
 ];
 
-app.use(cors({ 
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      console.warn(`⚠️  CORS blocked: ${origin}`);
-      callback(new Error("CORS not allowed"));
+      callback(new Error("CORS blocked"));
     }
   },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  credentials: true
 }));
 
 // ==========================================

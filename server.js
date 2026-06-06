@@ -10,6 +10,7 @@ import listingRoutes from "./routes/Listing.js";
 import userRoutes from "./routes/user.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import userDashboardRoutes from "./routes/userDashboardRoutes.js";
+import galleryRoutes from "./routes/gallery.js";
 
 const app = express();
 
@@ -72,6 +73,7 @@ app.use("/api/listings", listingRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userDashboardRoutes);
+app.use("/api/gallery", galleryRoutes);
 
 // ==========================================
 // HEALTH CHECK ROUTES

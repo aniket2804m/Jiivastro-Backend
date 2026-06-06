@@ -1,17 +1,28 @@
-import multer from 'multer';
+import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import cloudinary from "../config/cloudinary.js";
 
-// Configure Cloudinary storage for multer
-
 const storage = new CloudinaryStorage({
-    cloudinary,
-    params: {
-        folder: 'listings',
-        allowed_formats: ['jpg', 'jpeg', "png", "webp"],
-    },
+  cloudinary,
+  params: async (req, file) => {
+    const isVideo = file.mimetype.startsWith("video");
+
+    return {
+      folder: "gallery",
+      resource_type: isVideo ? "video" : "image",
+      allowed_formats: [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "mp4",
+        "mov",
+        "avi",
+      ],
+    };
+  },
 });
 
-const upload = multer({ storage});
+const upload = multer({ storage });
 
 export default upload;

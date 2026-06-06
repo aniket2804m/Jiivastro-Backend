@@ -14,7 +14,7 @@ import {
 } from "../controllers/listingController.js";     
 
 // Routes
-router.post("/create", isAdmin, verifyToken, upload.array("images", 10), createListing);
+router.post("/create", verifyToken, isAdmin, upload.array("images", 10), createListing);
 router.get("/", getAllListings);
 router.get("/:id", getListingById);
 router.delete("/:id", verifyToken, isAdmin, deleteListing);

@@ -4,10 +4,10 @@ import cloudinary from "../config/cloudinary.js";
 // POST - Create Listing
 export const createListing = async (req, res) => {
   try {
-    const { title, description, date, location, amenities } = req.body;
+    const { title, description, price, location, amenities } = req.body;
 
     // Validate
-    if (!title || !date) {
+    if (!title || !price) {
       return res.status(400).json({ message: "Required field missing" });
     }
 
@@ -25,7 +25,7 @@ export const createListing = async (req, res) => {
     const newListing = new Listing({
       title,
       description,
-      date,
+      price,
       location,
       amenities,
       images, // ✅ images add ki
@@ -127,10 +127,10 @@ export const updateListing = async (req, res) => {
     const updateData = {};
 
     // Text fields
-    const { title, description, date, location, amenities } = req.body;
+    const { title, description, price, location, amenities } = req.body;
     if (title) updateData.title = title;
     if (description) updateData.description = description;
-    if (date) updateData.date = date;
+    if (price) updateData.price = price;
     if (location) updateData.location = location;
     if (amenities) updateData.amenities = amenities;
 

@@ -4,7 +4,7 @@ import { isAdmin } from "../middleware/authorizeRole.js";
 import {
   getAllCourses, createCourse, updateCourse, deleteCourse,
   getAllUsers, toggleBlockUser,
-  getAnalytics,
+  getAnalytics, getAllEnquiries, deleteEnquiry
 } from "../controllers/adminControllers.js";
 
 const router = express.Router();
@@ -24,5 +24,9 @@ router.put("/users/:id/block", toggleBlockUser);
 
 // ── Analytics ─────────────────────────────────────────────
 router.get("/analytics", getAnalytics);
+
+// Form Enquirey data 
+router.get("/enquiries", getAllEnquiries);
+router.delete("/enquiries/:id", deleteEnquiry);
 
 export default router;

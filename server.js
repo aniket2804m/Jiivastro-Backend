@@ -11,6 +11,7 @@ import userRoutes from "./routes/user.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import userDashboardRoutes from "./routes/userDashboardRoutes.js";
 import galleryRoutes from "./routes/gallery.js";
+import enquiryRoutes from "./routes/CourseEnquiry.js";
 
 const app = express();
 
@@ -74,7 +75,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userDashboardRoutes);
 app.use("/api/gallery", galleryRoutes);
-
+app.use("/api/enquiries", enquiryRoutes);
 // ==========================================
 // HEALTH CHECK ROUTES
 // ==========================================

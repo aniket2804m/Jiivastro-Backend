@@ -1,6 +1,7 @@
 // controllers/adminController.js
 import Listing from "../models/courseListing.model.js";   // ✅ Course = Listing model tumhara
 import User from "../models/user.model.js";
+import CourseEnquiry from "../models/CourseEnquiry.js";
 
 // ─── COURSES (Listings) ──────────────────────────────────
 
@@ -105,5 +106,42 @@ export const getAnalytics = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+// Added Course Enquiry analytics
+  export const getAllEnquiries = async (req, res) => {
+  try {
+    const enquiries = await CourseEnquiry.find()
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json(enquiries);
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export const deleteEnquiry = async (req, res) => {
+  try {
+    const enquiry = await CourseEnquiry.findByIdAndDelete(
+      req.params.id
+    );
+
+    if (!enquiry) {
+      return res.status(404).json({
+        message: "Enquiry not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Enquiry deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
   }
 };
